@@ -1,0 +1,18 @@
+/* nav */
+.login-info p {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.minified .login-info p {
+    display: none
+}
+
+/* modals */
+.modal .jarviswidget-loader {display: none}
+.modal .visible {display: block}
+.modal .hide {display: none}
+.modal.loading .visible {display: none}
+.modal.loading .hide {display: block}
+.modal.loading .modal-footer {display: none}

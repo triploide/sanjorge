@@ -1,0 +1,14 @@
+AddDefaultCharset UTF-8
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^blank/?$ blank.php
+
+RewriteRule ^categorias/?$ categorias.php
+RewriteRule ^categorias/([0-9a-zA-Z-_]+)$ categorias.php?slug=$1
+RewriteRule ^categorias/?$ categorias.php
+
+RewriteRule ^login/?$ loginb.php
+RewriteRule ^salir/?$ php/controllers/logout.controller.php

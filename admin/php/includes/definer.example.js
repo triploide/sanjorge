@@ -1,0 +1,1 @@
+var BASE_URL = window.location.protocol+'//'+window.location.hostname+'/';
