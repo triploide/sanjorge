@@ -38,6 +38,7 @@
 <script src="js/app.min.js"></script>
 
 <!-- JS PROPIOS -->
+<script src="js/Cookies.js"></script>
 <script src="js/Box.js"></script>
 
 <!-- PAGE RELATED PLUGIN(S) 

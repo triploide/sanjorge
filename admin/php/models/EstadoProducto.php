@@ -15,11 +15,11 @@ class EstadoProducto extends Doctrine_Record {
     public static function toSelect($producto=false)
     {
         $estadoId = ($producto)?$producto->id_estado:0;
-        $estados = Doctrine::getTable('EstadoProducto')->findAll(Doctrine::HYDRATE_ARRAY);
+        $estados = array(1=>'Visible', 2=>'Oculto');
         $html = '<select class="dt-inputarea" data-value="'.$estadoId.'" id="selectEstado" name="estado">';
-            foreach ($estados as $estado) {
-                $selected = ($estado['id'] == $estadoId)?$selected = '  selected="selected"':$selected = '';
-                $html .= '<option value="' . $estado['id'] . '"' . $selected . '>' . $estado['value'] . '</option>';
+            foreach ($estados as $key => $value) {
+                $selected = ($key == $estadoId)?$selected = '  selected="selected"':$selected = '';
+                $html .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
             }
         $html .= '</select>';
         return $html;

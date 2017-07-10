@@ -11,19 +11,23 @@
 
     <nav>
         <ul>
-            <li>
-                <a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
-                <ul>
-                    <li>
-                        <a href="index.html" title="Dashboard"><span class="menu-item-parent">Analytics Dashboard</span></a>
-                    </li>
-                    <li class="">
-                        <a href="dashboard-social.html" title="Dashboard"><span class="menu-item-parent">Social Wall</span></a>
-                    </li>
-                </ul>   
+            <li data-nav="categorias">
+                <a href="categorias"><i class="fa fa-lg fa-fw fa-list"></i> <span class="menu-item-parent">Categorías</span></a>
             </li>
-            <li>
-                <a href="widgets.html"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Widgets</span></a>
+            <li data-nav="productos">
+                <a href="productos"><i class="fa fa-lg fa-fw fa-th-large"></i> <span class="menu-item-parent">Productos</span></a>
+            </li>
+            <li data-nav="pedidos">
+                <a href="pedidos"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Pedidos</span></a>
+            </li>
+            <li data-nav="stock">
+                <a href="stock-listado"><i class="fa fa-lg fa-fw fa-dropbox"></i> <span class="menu-item-parent">Stock</span></a>
+            </li>
+            <li data-nav="precios">
+                <a href="precios"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Precios</span></a>
+            </li>
+            <li data-nav="clientes">
+                <a href="clientes"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Clientes</span></a>
             </li>
         </ul>
     </nav>

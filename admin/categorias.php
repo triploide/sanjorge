@@ -13,7 +13,14 @@
     <?php include(INC.'admin/tpl/partials/footer.tpl'); ?>
     <?php include(INC.'admin/tpl/partials/scripts.tpl'); ?>
 
-    <?php include(INC.'admin/tpl/categorias/form.modal.tpl'); ?>
+    <?php include(INC.'admin/tpl/modals/borrar.tpl'); ?>
+
+    <script src="js/plugin/datatables/i18n/spanish.js"></script>
+    <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script src="js/plugin/datatables/dataTables.colVis.min.js"></script>
+    <script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
+    <script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
     <script src="js/categorias.js"></script>
 </body>

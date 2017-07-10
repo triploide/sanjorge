@@ -1,3 +1,5 @@
+input[disabled] {background-color: #efefef !important; cursor: not-allowed !important}
+
 /* nav */
 .login-info p {
     font-size: 16px;
@@ -16,3 +18,26 @@
 .modal.loading .visible {display: none}
 .modal.loading .hide {display: block}
 .modal.loading .modal-footer {display: none}
+
+/*DATATABLES*/
+.dataTable .ui-sortable-placeholder::before {content: none !important;}
+.dataTable .ui-sortable-helper {height: 50px}
+.dataTable .sortable {cursor: move;}
+.dataTable th:last-child, .dataTable td:last-child {text-align: right;}
+.dataTables_empty {text-align: center !important;}
+.dataTable .row-detail th, .dataTable .row-detail td {text-align: left !important;}
+.dataTable .label {cursor: pointer}
+/* ----------- */
+
+/*SLIDER*/
+.superbox-list {vertical-align: top;}
+.superbox-list a.btn-danger {position: absolute; right: 6px; bottom: 6px}
+.superbox-list a.btn-primary {position: absolute; right: 45px; bottom: 6px}
+/*.superbox-list a.hide {display: block !important}*/
+.superbox-list .btn:active {position: absolute; top: inherit !important; left: inherit !important}
+.superbox-img {cursor: move; min-height: 32px;}
+.superbox-img:hover {opacity: 1}
+.ui-sortable-placeholder {height: auto !important; visibility: visible !important; vertical-align: top;}
+.ui-sortable-placeholder::before {content: ''; display: block; outline: 1px dashed #a8a8a8; width: 100%; padding-top: 100%; box-sizing: border-box;}
+#sliderImagenes .empty {margin: 60px 0; font-size: 24px; text-align: center}
+/*FIN SLIDER*/

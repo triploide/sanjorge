@@ -11,6 +11,7 @@ class Producto extends Doctrine_Record {
         $this->hasColumn('costo', 'decimal', 8);
         $this->hasColumn('margen', 'decimal', 4);
         $this->hasColumn('precio', 'decimal', 8);
+        $this->hasColumn('ubicacion', 'string', 50);
         $this->hasColumn('id_estado', 'integer', 1, array('default'=>1, 'unsigned'=>true));
         $this->hasColumn('id_categoria','integer', 1, array('unsigned'=>true));
     }
@@ -36,6 +37,17 @@ class Producto extends Doctrine_Record {
         //behaviors
         $this->actAs('Sluggable', array('fields'=>array('nombre'),'unique'=>true,'canUpdate'=>true,'name'=>'slug'));
         $this->actAs('Versionable', array( 'versionColumn' => 'version', 'className' => '%CLASS%Version', 'auditLog' => true));
+    }
+
+    public function imagenes ()
+    {
+        return Doctrine_Query::create()
+            ->select('i.*')
+            ->from('Imagen i')
+            ->andWhere('i.id_producto = ?', $this->id)
+            ->orderBy('i.orden')
+            ->execute()
+        ;
     }
 
 }

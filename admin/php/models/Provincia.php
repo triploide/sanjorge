@@ -29,11 +29,12 @@ class Provincia extends Doctrine_Record {
     public static function toSelect($objeto=false) {
         $provinciaId = ($objeto)?$objeto->localidad->provincia->id:0;
         $provincias = Doctrine::getTable('provincia')->findAll(Doctrine::HYDRATE_ARRAY);
-        $html = '<select class="dt-inputarea" data-value="'.$provinciaId.'" id="selectProvincia" name="provincia">';
-            foreach ($provincias as $prov) {
-                $selected = ($prov['id'] == $provinciaId)?$selected = '  selected="selected"':$selected = '';
-                $html .= '<option value="' . $prov['id'] . '"' . $selected . '>' . htmlentities($prov['value']) . '</option>';
-            }
+        $html = '<select name="provincia">';
+        $html .= '<option value="">Elegir</option>';
+        foreach ($provincias as $prov) {
+            $selected = ($prov['id'] == $provinciaId)?$selected = ' selected="selected"':$selected = '';
+            $html .= '<option value="'.$prov['id'].'"'.$selected.'>'.$prov['value'].'</option>';
+        }
         $html .= '</select>';
         return $html;
     }

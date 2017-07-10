@@ -4,11 +4,31 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^blank/?$ blank.php
+RewriteRule ^login/?$ login.php
+RewriteRule ^logout/?$ php/controllers/logout.controller.php
 
 RewriteRule ^categorias/?$ categorias.php
-RewriteRule ^categorias/([0-9a-zA-Z-_]+)$ categorias.php?slug=$1
-RewriteRule ^categorias/?$ categorias.php
+RewriteRule ^categoria/([0-9a-zA-Z-_]+)$ categoria.php?slug=$1
+RewriteRule ^categoria/?$ categoria.php
+
+RewriteRule ^productos/?$ productos.php
+RewriteRule ^producto/([0-9a-zA-Z-_]+)$ producto.php?slug=$1
+RewriteRule ^producto/([0-9a-zA-Z-_]+)/historial/?$ producto-historial.php?slug=$1
+RewriteRule ^producto/?$ producto.php
+RewriteRule ^categoria/([0-9a-zA-Z-_]+)/productos$ productos.php?categoria=$1
+
+RewriteRule ^pedidos/?$ pedidos.php
+RewriteRule ^pedidos/([0-9]+)$ pedido.php?id=$1
+
+RewriteRule ^stock-listado/?$ stocks.php
+RewriteRule ^stock/([0-9]+)/?$ stock.show.php?id=$1
+RewriteRule ^stock/?$ stock.php
+
+RewriteRule ^precios/?$ precios.php
+
+RewriteRule ^clientes/?$ clientes.php
+RewriteRule ^cliente/([0-9]+)$ cliente.php?id=$1
+RewriteRule ^cliente/?$ cliente.php
 
 RewriteRule ^login/?$ loginb.php
 RewriteRule ^salir/?$ php/controllers/logout.controller.php

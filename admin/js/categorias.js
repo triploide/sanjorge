@@ -1,104 +1,130 @@
-var Categorias = (function (window, $, undefined) {
+var Categorias = (function (w, $, undefined) {
 
     function init () {
-        $('[data-nav="categorias"]').addClass('active');
-        dtInit();
-        add();
+        boxes();
         borrar();
+        dtInit();
+        borrarModalInit();
+        $('#left-panel li[data-nav="categorias"]').addClass('active');
     }
 
+    var dataTable, currentRow = 0,
+        responsiveHelper_dt_basic = undefined,
+        breakpointDefinition = {
+            tablet : 1024,
+            phone : 480
+        }
+    ;
+    //labels
     var formatData = {
-        labelMap: {
-            data: {
-                1:{i: 1,'label':'success','value':'Visible'},
-                2:{i: 2,'label':'warning','value':'Oculta'}
-            },
-            getLabel: function (estado) {
-                return this.data[estado];
-            },
-            render : function (row) {
-                var estado = this.data[row.estado_id];
-                return '<span data-id="'+row.slug+'" data-estado="'+estado.i+'" class="estado switch-state label label-'+estado.label+'">'+estado.value+'</span>'
-            }
+        shortenerText: function (text, length) {
+            length = length || 34;
+            return (text.length > length)?'<a href="javascript:void(0);" rel="tooltip" data-placement="top" data-original-title=\''+text+'\' data-html="false">'+text.substring(0, length)+'...'+'</a>':text;
+        },
+        normalizeDate: function (date) {
+            return (!date)?'':date.replace(/.*([0-9]{4})-([0-9]{2})-([0-9]{2}).*/, '$3-$2-$1');
         },
         acciones: function (row) {
             return '\
-                <a href="'+BASE_URL+'admin/categorias/'+row.slug+'" class="btn btn-primary btn-sm" title="Editar" rel="tooltip"><i class="fa fa-pencil"></i></a>\
-                <a data-id="'+row.id+'" class="borrar btn btn-danger btn-sm" title="Borrar" rel="tooltip"><i class="fa fa-trash-o"></i></a>\
+                <a href="categoria/'+row.slug+'" title="Editar" rel="tooltip" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>\
+                <a href="categoria/'+row.slug+'/productos" title="Productos" rel="tooltip" class="btn btn-success btn-sm"><i class="fa fa-th-large"></i></a>\
+                <a data-id="'+row.id+'" title="Borrar" rel="tooltip" class="borrar btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>\
             ';
         }
-    }
-    
-    //tpl
-    function getTplRow () {
-        if (tplRow == undefined) {
-            tplRow = $('#tplRowTag').val();
-        }
-        return tplRow;
-    }
-    //fin tpl
+        //fin label
+    };
+    //fin labels
 
     //Data Table
-    function dtInit () {
-        var start = (Cookie.readCookie('tableCategorias') != null)?Cookie.readCookie('tableCategorias')*10:0;
-        var options = {
+    function dtInit() {
+        dataTable = $('#datatable').DataTable({
+             "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+                "t"+
+                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "autoWidth" : true,
+            processing: false,
+            serverSide: true,
+            stateSave: false,
+            ajax: {
+                url: BASE_URL + 'admin/php/providers/categorias.provider.php',
+                /*data: function(d) {
+                    d.designId = di;
+                }*/
+            },
+            language: dtLanguage,
+            "preDrawCallback" : function() {
+                // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_dt_basic) {
+                    responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#datatable'), breakpointDefinition);
+                }
+            },
+            "rowCallback" : function(nRow, aData) {
+                responsiveHelper_dt_basic.createExpandIcon(nRow);
+            },
+            fnDrawCallback: function(oSettings) {
+                $('a[rel="tooltip"]').tooltip();
+                $('.datatable_filter input').focus();
+                responsiveHelper_dt_basic.respond();
+            },
             columnDefs: [
                 {
-                    render: function ( data, type, row ) {return row.value;},
+                    render: function ( data, type, row ) {
+                        return row.nombre;
+                    },
                     targets: 0
                 },
                 {
-                    render: function ( data, type, row ) {return row.total_posts},
+                    render: function(data, type, row) {
+                        return row.productos
+                    },
                     targets: 1
                 },
                 {
-                    render: function ( data, type, row ) {return formatData.labelMap.render(row)},
+                    render: function(data, type, row) {
+                        return formatData.acciones(row);
+                    },
                     targets: 2
                 },
-                {
-                    render: function ( data, type, row ) {return formatData.acciones(row)},
-                    targets: 3
+                { 
+                    sortable: false,
+                    targets: [2]
                 }
             ],
-            ordering: false,
-            displayStart: start
-        }
-        dataTable = $('#datatable').dataTable($.extend(options, datatableDefault));
-        //paginado
-        dataTable.on('page.dt', function () {
-            var page = dataTable.api().page.info().page
-            Cookie.createCookie('datatable', page);
+            order: [[ 0, "desc" ]]
         });
     }
-    
+    //fin Data Table
+
     //borrar
     function borrar () {
         var id;
         $('#datatable').on('click', '.borrar', function (event) {
+            $this = $(this);
             id = $(this).attr('data-id');
             event.preventDefault();
-            $('#modal-borrar').modal('show');
-            $('#modal-borrar .action').off('click').on('click', function () {
-                $('#modal-borrar .modal-footer button').unbind('click');
-                $('#modal-borrar').addClass('loading');
+            borrarModalInit();
+            $('#modalBorrar').modal('show');
+            $('#modalBorrar .action').click(function () {
+                $('#modalBorrar .modal-footer button').unbind('click');
+                loaderModalInit();
                 $.ajax({
                     type:'post',
                     url: BASE_URL+'admin/php/erasers/categoria.eraser.php',
                     data:{'id':id},
                     success: function (response) {
+                        $('#modalBorrar').modal('hide');
                         if (response.success) {
-                            $('#modal-borrar').removeClass('loading').modal('hide');
-                            $('#row'+id).fadeOut(
+                            $this.parents('tr').fadeOut(
                                 500,
                                 function () {
-                                    $('#row'+id).remove();
-                                    if ($('#datatables tbody tr').length == 0) {
+                                    $this.parents('tr').remove();
+                                    if ($('#datatable tbody tr').length == 0) {
                                         dataTable.ajax.reload();
                                     }
                                 }
                             );
                         } else {
-                            Box.small(reponse.message).success().show();
+                            Box.small({title: response.error}).error().show();
                         }
                     }
                 });
@@ -106,45 +132,29 @@ var Categorias = (function (window, $, undefined) {
         });
     }
     //fin borrar
-    
-    //funciones
-    function add() {
-        var data;
-        $('a[href="agregar-categoria"]').on('click', function(event) {
-            event.preventDefault();
-            addModalInit();
-            $('#modal-form').modal('show');
-            $('#modal-form .action').off('click').on('click', function () {
-                data = $('#modal-form form').serialize();
-                $('#modal-form form #value').val('');
-                $('#modal-form .modal-footer button').unbind('click');
-                $('#modal-form').addClass('loading');
-                save(data, function (tag) {
-                    $('#modal-form').removeClass('loading').modal('hide');
-                    var html = getTplRow().replace(/\$\{id\}/g, tag.id)
-                        .replace(/\$\{value\}/g, tag.value)
-                        .replace(/\$\{acciones\}/g, formatData.acciones(tag));
-                    $('#datatable .dataTables_empty').parents('tr').remove();
-                    $('#datatable tbody').prepend(html).find('tr:first td').animate({backgroundColor: "#ecf3f8"}, 700, 'easeOutCubic', function() {
-                        $('#datatable tbody tr:first td').animate({backgroundColor: "#fff"}, 800, 'easeInCubic')
-                    });
-                    onAddComplete();
-                });
-            });
-        });
+
+    //modal   
+    function borrarModalInit () {
+        $('#modalBorrar .modal-title .text').html('Borrar Categoría');
+        $('#modalBorrar .modal-title .jarviswidget-loader').hide();
+        $('#modalBorrar .modal-body .content').html('<p>¿Está seguro que desea borrar esta categoría?</p>');
+        $('#modalBorrar button.action').attr('data-id', false);
+        $('#modalBorrar .modal-footer button').attr('disabled', false);
+        $('#modalBorrar .modal-footer button.btn-default').show();
+        $('#modalBorrar .modal-dialog').css('width', '');
     }
-    
-    function save (data, callback) {
-        $.ajax({
-            type:'post',
-            url:BASE_URL+'admin/php/controllers/categoria.controller.php',
-            data:data,
-            success: function (response) {
-                callback(response);
-            }
-        });
+
+    function loaderModalInit() {
+        $('#modalBorrar .modal-title .jarviswidget-loader').show();
+        $('#modalBorrar .modal-body .content').html('Por favor espere...');
+        $('#modalBorrar .modal-footer button').attr('disabled', true);
     }
-    //fin funciones
+    //fin modal
+    
+    function boxes () {
+        Box.small({title:'La categoría <br>se cargó con éxito'}).success().showIfHash('new');
+        Box.small({title:'La categoría <br>se editó con éxito'}).success().showIfHash('edit');
+    }
     
     return {
         init : function () {
@@ -153,4 +163,6 @@ var Categorias = (function (window, $, undefined) {
     }
 })(window, jQuery, undefined);
 
-Categorias.init();
+$(document).ready(function () {
+    Categorias.init();
+});

@@ -1,6 +1,6 @@
 var Cookie = (function (w, $, undefined) {
 
-    function createCookie(name, value, days) {
+    function set(name, value, days) {
         var expires = "";
         if (days) {
             var date = new Date();
@@ -10,7 +10,7 @@ var Cookie = (function (w, $, undefined) {
         document.cookie = name + "=" + value + expires + "; path=/";
     }
 
-    function readCookie(name) {
+    function get(name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
@@ -21,19 +21,19 @@ var Cookie = (function (w, $, undefined) {
         return null;
     }
 
-    function eraseCookie(name) {
+    function erase(name) {
         createCookie(name, "", -1);
     }
 
     return {
-        createCookie: function (name, value, day) {
-            createCookie(name, value, days);
+        get: function (name, value, day) {
+            get(name, value, days);
         },
-        name: function (name) {
-            readCookie(name);
+        set: function (name) {
+            set(name);
         },
-        eraseCookie: function (name) {
-            eraseCookie(name);
+        erase: function (name) {
+            erase(name);
         }
     }
 

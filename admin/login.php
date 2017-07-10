@@ -1,8 +1,8 @@
-﻿<?php include('php/includes/config.php'); ?>
+﻿<?php include('php/includes/definer.php'); ?>
 <!DOCTYPE html>
 <html lang="es-ar">
 <head>
-    <?php include(INC.'admin/tpl/partials/head.tpl') ?>
+    <?php include('tpl/partials/head.tpl') ?>
 </head>
 
 <body class="hidden-menu">

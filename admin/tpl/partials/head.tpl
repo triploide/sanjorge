@@ -20,6 +20,7 @@
 
 <!-- SmartAdmin RTL Support -->
 <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> 
+<link rel="stylesheet" type="text/css" media="screen" href="css/daterangepicker-bs3.css"> 
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
 

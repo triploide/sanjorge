@@ -14,8 +14,6 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12 content">
-                        <p class="visible">¿Está seguro que quiere borrar esta categoría?</p>
-                        <p class="hide">Por favor espere...</p>
                     </div>
                 </div>
             </div>

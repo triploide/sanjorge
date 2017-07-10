@@ -30,10 +30,11 @@ class Localidad extends Doctrine_Record {
         $localidadId = ($objeto)?$objeto->localidad->id:0;
         $localidades = Localidad::findByProvincia($provinciaId);
         $html = '<select class="dt-inputarea" data-value="'.$localidadId.'" id="selectLocalidad" name="localidad">';
-            foreach ($localidades as $localidad) {
-                $selected = ($localidad['id'] == $localidadId)?'  selected="selected"':$selected = '';
-                $html .= '<option value="' . $localidad['id'] . '"' . $selected . '>' . htmlentities($localidad['value']) . '</option>';
-            }
+        $html .= '<option value="">Elegir</option>';
+        foreach ($localidades as $localidad) {
+            $selected = ($localidad['id'] == $localidadId)?' selected="selected"':$selected = '';
+            $html .= '<option value="'.$localidad['id'].'"'.$selected.'>'.$localidad['value'].'</option>';
+        }
         $html .= '</select>';
         return $html;
     }

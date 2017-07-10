@@ -6,6 +6,7 @@ class Categoria extends Doctrine_Record {
         $this->setTableName('categoria');
         $this->hasColumn('id', 'integer', 1, array('primary' => true, 'unsigned'=>true, 'autoincrement'=>true));
         $this->hasColumn('value', 'string', 255);
+        $this->hasColumn('estado', 'integer', 1, array('unsigned'=>true, 'default'=>1));
     }
     
     public function setUp()
@@ -27,7 +28,7 @@ class Categoria extends Doctrine_Record {
         $html = '<select class="dt-inputarea" data-value="'.$categoriaId.'"  id="selectCategoria" name="categoria">';
             foreach ($categorias as $categoria) {
                 $selected = ($categoria['id'] == $categoriaId)?' selected="selected"':'';
-                $html .= '<option value="' . $categoria['id'] . '"' . $selected . '>' . utf8_decode($categoria['value']) . '</option>';
+                $html .= '<option value="' . $categoria['id'] . '"' . $selected . '>' . $categoria['value'] . '</option>';
             }
         $html .= '</select>';
         return $html;

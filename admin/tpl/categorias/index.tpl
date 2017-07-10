@@ -26,7 +26,7 @@
             </div>
             <!-- end col -->
             <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8 text-right">
-                <a href="agregar-categoria" class="btn btn-success"><span class="fa fa-plus"></span> Agregar</a>
+                <a href="categoria" class="btn btn-success"><span class="fa fa-plus"></span> Agregar</a>
             </div>
         </div>
         <!-- end row -->
@@ -52,7 +52,6 @@
                     >
 
                         <header>
-                            <span class="widget-icon"> <i class="fa fa-list"></i> </span>
                             <h2>Listado de categorías</h2>              
                         </header>
         
@@ -65,7 +64,6 @@
                                         <tr>
                                             <th data-class="expand">Nombre</th>
                                             <th data-hide="phone,tablet">Productos</th>
-                                            <th data-hide="phone">Estado</th>
                                             <th><i class="fa fa-fw fa-cog text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
                                         </tr>
                                     </thead>
