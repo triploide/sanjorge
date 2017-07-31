@@ -85,7 +85,7 @@ var Clientes = (function (w, $, undefined) {
                 {
                     render: function(data, type, row) {
                         var location = '';
-                        if (!row.localidad == null) location = ', ' + row.localidad + ' - ' + row.provincia;
+                        if (row.localidad != null) location = ', ' + row.localidad + ' - ' + row.provincia;
                         row.direccion = row.direccion || '';
                         return row.direccion + location
                     },

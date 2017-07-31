@@ -97,7 +97,7 @@ var Pedidos = (function (w, $, undefined) {
                 },
                 {
                     render: function(data, type, row) {
-                        return row.total
+                        return '$ ' + parseInt(row.total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 2
                 },

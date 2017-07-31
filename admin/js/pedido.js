@@ -84,19 +84,19 @@ var Pedido = (function (w, $, undefined) {
                 },
                 {
                     render: function(data, type, row) {
-                        return row.cantidad
+                        return parseInt(row.cantidad).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 4
                 },
                 {
                     render: function(data, type, row) {
-                        return row.precio
+                        return '$ ' + parseInt(row.precio).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 5
                 },
                 {
                     render: function(data, type, row) {
-                        return row.total
+                        return '$ ' + parseInt(row.total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 6
                 }

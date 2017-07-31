@@ -24,9 +24,6 @@
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
 
-<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
-
 <!-- #FAVICONS -->
 <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">

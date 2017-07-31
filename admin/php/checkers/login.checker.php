@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION) || !isset($_SESSION['chisel_log']) || $_SESSION['chisel_log'] != 'validUser') {
-    session_destroy();
+if (!isset($_SESSION) || !isset($_SESSION['admin']) || $_SESSION['admin'] != 'validUser') {
     header('location: '.URL.'admin/login');
     exit();
 }
-if (!$usuLog = Doctrine::getTable('Usuario')->find($_SESSION['chisel_user_id'])) {
-    session_destroy();
+if (!$usuLog = Doctrine::getTable('Usuario')->find($_SESSION['admin_id'])) {
     header('location: '.URL.'admin/login');
     exit();
 }

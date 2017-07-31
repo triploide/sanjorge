@@ -76,7 +76,7 @@ var Stocks = (function (w, $, undefined) {
                 },
                 {
                     render: function(data, type, row) {
-                        return row.costo
+                        return '$ ' + parseInt(row.costo).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 1
                 },

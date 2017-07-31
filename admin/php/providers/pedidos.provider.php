@@ -17,7 +17,7 @@ $data = Doctrine_Query::create()
     ->limit($_GET['length'])
     ->offset($_GET['start'])
     ->groupBy('p.id')
-    ->orderBy($orderColumn[$_GET['order'][0]['column']].' '.$_GET['order'][0]['dir']);
+    ->orderBy($orderColumn[$_GET['order'][0]['column']].' '.$_GET['order'][0]['dir'].', p.id desc');
 ;
 
 $recordsTotal = Doctrine_Query::create()

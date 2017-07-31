@@ -1,0 +1,26 @@
+AddDefaultCharset UTF-8
+RewriteEngine on
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#vistas de clientes
+RewriteRule ^clientes/acceder?$ clientes/login.php
+RewriteRule ^clientes/productos/?$ clientes/productos.php
+RewriteRule ^clientes/pedido/?$ clientes/pedido.php
+RewriteRule ^clientes/pedido/exito?$ clientes/pedido-exitoso.php
+
+#login y logout
+RewriteRule ^clientes/login$ admin/php/controllers/clientes/login.controller.php
+RewriteRule ^clientes/logout$ admin/php/controllers/clientes/logout.controller.php
+
+#productos
+RewriteRule ^productos/json$ admin/php/providers/clientes/productos.provider.php
+RewriteRule ^productos/imprimir$ admin/php/controllers/clientes/imprimirProductos.controller.php
+
+#acciones del carrito
+RewriteRule ^carrito/agregar$ admin/php/controllers/cart/add.controller.php
+RewriteRule ^carrito/remover$ admin/php/controllers/cart/remove.controller.php
+RewriteRule ^carrito/refrescar$ admin/php/controllers/cart/refresh.controller.php
+RewriteRule ^carrito/comprar$ admin/php/controllers/cart/shop.controller.php

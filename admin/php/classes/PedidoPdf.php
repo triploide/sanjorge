@@ -2,12 +2,13 @@
 include(dirname(__FILE__).'/fpdf.php');
 class PedidoPdf extends FPDF {
     
-    var $javascript; 
-    var $n_js;
-    var $widthTotal;
-    var $total = 0;
-    var $fecha;
-    var $pedido;
+    public $javascript; 
+    public $n_js;
+    public $widthTotal;
+    public $total = 0;
+    public $fecha;
+    public $pedido;
+    public $money;
     
     public function __construct($pedido) {
         parent::__construct();
@@ -98,7 +99,9 @@ class PedidoPdf extends FPDF {
                 $this->cabecera($header);
             }
             foreach ($row as $key=>$col) {
+                if ($key == 'id') continue;
                 if ($key == 'total') $this->total += $col;
+                if (in_array($key, $this->money)) $col = '$ ' . number_format($col, 0, ',', '.');
                 $this->Cell($header[$i]['width'], 7, utf8_decode($col), 'LR', 0, 'C', $fill);
                 $i++;
             }
@@ -115,7 +118,7 @@ class PedidoPdf extends FPDF {
 
         $this->SetFillColor(255, 255, 255);
         $this->SetTextColor(0);
-        $this->Cell($this->widthTotal, 7, 'Valor total: ' . $this->total . '   ', 1, 0, 'R', true);
+        $this->Cell($this->widthTotal, 7, 'Valor total: ' . '$ ' . number_format($this->total, 0, ',', '.') . '   ', 1, 0, 'R', true);
         $this->Ln();
 
         // Línea de cierre

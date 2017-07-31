@@ -12,7 +12,7 @@ $cliente->horario = $_POST['horario'];
 $cliente->telefono = $_POST['telefono'];
 $cliente->cuit = $_POST['cuit'];
 $cliente->direccion = $_POST['direccion'];
-if ($_POST['id_localidad'])  $cliente->nombre = $_POST['localidad'];
+if ($_POST['localidad'])  $cliente->id_localidad = $_POST['localidad'];
 $cliente->save();
 
 $accion = ($_POST['id'])?'#edit':'#new';

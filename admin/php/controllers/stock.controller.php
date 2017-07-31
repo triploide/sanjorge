@@ -32,5 +32,5 @@ foreach ($items->items as $item) {
 }
 $stockLog->save();
 $productosCollection->save();
-header('location: '.URL.'admin/stock-listado/log#new');
+header('location: '.URL.'admin/stock-listado#new');
 

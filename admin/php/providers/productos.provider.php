@@ -13,7 +13,7 @@ $orderColumn = array(
 );
 
 $data = Doctrine_Query::create()
-    ->select('p.*, p.id_estado as estado, c.value as categoria, i.src as imagen')
+    ->select('p.id, p.codigo, p.stock, p.nombre, p.precio, p.slug, p.id_estado as estado, c.value as categoria, i.src as imagen')
     ->from('Producto as p')
     ->innerJoin('p.categoria as c')
     ->leftJoin('p.imagenes as i')
@@ -36,10 +36,10 @@ if ($_GET['categoria']) $recordsTotal->where('c.slug = ?', $_GET['categoria']);
 $recordsFiltered = $recordsTotal->copy();
 
 //busqueda
-if ($_GET['search']['value']) {
-    $searchTerm = array('%'.$_GET['search']['value'].'%', $_GET['search']['value'].'%');
-    $data->andWhere('c.nombre like ? or c.codigo like ?', $searchTerm);
-    $recordsFiltered->andWhere('c.value like "'.$_GET['search']['value'].'%"');
+if ($searchTerm = $_GET['search']['value']) {
+    $searchTerm = array_fill(0,2,'%'.$searchTerm.'%');
+    $data->andWhere('p.nombre like ? or p.codigo like ?', $searchTerm);
+    $recordsFiltered->andWhere('p.nombre like ? or p.codigo like ?', $searchTerm);
 }
 
 //ejecuto los dql

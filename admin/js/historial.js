@@ -91,19 +91,19 @@ var Historial = (function (w, $, undefined) {
                 },
                 {
                     render: function(data, type, row) {
-                        return row.costo
+                        return '$ ' + parseInt(row.costo).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 3
                 },
                 {
                     render: function(data, type, row) {
-                        return row.margen
+                        return '% ' + row.margen
                     },
                     targets: 4
                 },
                 {
                     render: function(data, type, row) {
-                        return row.precio
+                        return '$ ' + parseInt(row.precio).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                     },
                     targets: 5
                 },

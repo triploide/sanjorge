@@ -7,7 +7,7 @@ $orderColumn = array(
 );
 
 $data = Doctrine_Query::create()
-    ->select('c.id, c.razon_social, c.horario, c.email, p.value as provincia, l.value as localidad')
+    ->select('c.id, c.razon_social, c.horario, c.email, c.direccion, p.value as provincia, l.value as localidad')
     ->from('Cliente as c')
     ->leftJoin('c.localidad as l')
     ->leftJoin('l.provincia as p')

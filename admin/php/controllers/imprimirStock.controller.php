@@ -14,10 +14,6 @@ $data = Doctrine_Query::create()
 
 $header = array(
     array(
-        'value'=>'Nº',
-        'width' => 10
-    ),
-    array(
         'value'=>'Código',
         'width' => 25
     ),
@@ -31,17 +27,18 @@ $header = array(
     ),
     array(
         'value'=>'Costo',
-        'width' => 30
+        'width' => 35
     ),
     array(
         'value'=>'Total',
-        'width' => 30
+        'width' => 35
     )
 );
 
 $fecha = preg_replace('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', '$3-$2-$1', $stock->fecha);
 
 $pdf = new StockPdf($fecha);
+$pdf->money = array('costo', 'total');
 $pdf->AddPage();
 $pdf->SetFont('Arial','',12);
 $pdf->fancyTable($header, $data);

@@ -5,7 +5,7 @@ require INC . 'admin/php/classes/PedidoPdf.php';
 $pedido = Doctrine::getTable('Pedido')->find($_GET['id']);
 
 $data = Doctrine_Query::create()
-    ->select('p.codigo as codigo, p.nombre as producto, p.ubicacion as ubicacion, i.cantidad as cantdidad, i.precio as precio, i.precio*i.cantidad as total')
+    ->select('p.codigo as codigo, p.nombre as producto, p.ubicacion as ubicacion, i.cantidad as cantdidad, i.precio as precio, i.precio*i.cantidad as total, i.id')
     ->from('Item as i')
     ->innerJoin('i.producto as p')
     ->where('i.id_pedido = ?', $_GET['id'])
@@ -44,6 +44,7 @@ $header = array(
 );
 
 $pdf = new PedidoPdf($pedido);
+$pdf->money = array('precio', 'total');
 $pdf->AddPage();
 $pdf->SetFont('Arial','',12);
 $pdf->fancyTable($header, $data);
