@@ -17,6 +17,9 @@
             <li data-nav="productos">
                 <a href="productos"><i class="fa fa-lg fa-fw fa-th-large"></i> <span class="menu-item-parent">Productos</span></a>
             </li>
+            <li data-nav="importar">
+                <a href="importaciones-listado"><i class="fa fa-lg fa-fw fa-upload"></i> <span class="menu-item-parent">Importar</span></a>
+            </li>
             <li data-nav="pedidos">
                 <a href="pedidos"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Pedidos</span></a>
             </li>

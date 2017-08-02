@@ -7,7 +7,7 @@ class Producto extends Doctrine_Record {
         $this->hasColumn('id', 'integer', 2, array('primary' => true, 'unsigned'=>true, 'autoincrement'=>true));
         $this->hasColumn('nombre', 'string', 255);
         $this->hasColumn('codigo', 'string', 30);
-        $this->hasColumn('stock', 'integer', 3);
+        $this->hasColumn('stock', 'integer', 3, array('default' => 0, 'unsigned'=>true));
         $this->hasColumn('costo', 'decimal', 8);
         $this->hasColumn('margen', 'decimal', 4);
         $this->hasColumn('precio', 'decimal', 8);

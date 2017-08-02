@@ -17,6 +17,11 @@ RewriteRule ^producto/([0-9a-zA-Z-_]+)/historial/?$ producto-historial.php?slug=
 RewriteRule ^producto/?$ producto.php
 RewriteRule ^categoria/([0-9a-zA-Z-_]+)/productos$ productos.php?categoria=$1
 
+RewriteRule ^importaciones-listado/?$ importaciones.php
+RewriteRule ^importaciones/([0-9]+)/?$ importaciones.show.php?id=$1
+RewriteRule ^importar/?$ importar.php
+
+
 RewriteRule ^pedidos/?$ pedidos.php
 RewriteRule ^pedidos/([0-9]+)$ pedido.php?id=$1
 
