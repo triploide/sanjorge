@@ -39,7 +39,7 @@ class Categoria extends Doctrine_Record {
         return Doctrine_Query::create()
             ->select('count(id)')
             ->from('categoria c')
-            ->innerJoin('c.productos p ON c.id = ?', $this->id)
+            ->innerJoin('c.productos p WITH c.id = ?', $this->id)
             ->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR)
         ;
     }

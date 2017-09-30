@@ -31,7 +31,8 @@ $recordsTotal = Doctrine_Query::create()
     ->select('count(p.id)')
     ->from('Producto as p')
     ->innerJoin('p.categoria as c')
-    ->where('p.id_estado <> ?', EstadoProducto::BORRADO)
+    ->where('stock > 0')
+    ->andWhere('p.id_estado <> ?', EstadoProducto::BORRADO)
 ;
 if ($_GET['categoria']) $recordsTotal->where('c.slug = ?', $_GET['categoria']);
 $recordsFiltered = $recordsTotal->copy();

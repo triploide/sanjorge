@@ -1,3 +1,4 @@
 sanjorge.sublime-project
 sanjorge.sublime-workspace
-recursos
+recursos/
+node_modules/

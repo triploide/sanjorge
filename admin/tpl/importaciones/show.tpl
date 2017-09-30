@@ -82,7 +82,7 @@
                                         <table id="datatable-errores" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>                         
                                                 <tr>
-                                                    <th data-class="expand">Tipo</th>
+                                                    <th>Tipo</th>
                                                     <th data-class="expand">Mensaje</th>
                                                 </tr>
                                             </thead>

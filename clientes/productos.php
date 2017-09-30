@@ -96,7 +96,7 @@ $categorias = Doctrine_Query::create()->select('*')->from('Categoria')->where('e
 	<!--//about-->
 	
 	<!--gallery-->
-	<div class="container">
+	<div class="container" style="min-height: 550px">
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <select id="categoria" class="form-control">
